@@ -9,7 +9,9 @@ const MovieList: React.FC = () => {
   const [yearFilter, setYearFilter] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Fetch movies from the API
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 10 }, (_, index) => currentYear - index);
+
   const fetchMovies = async ({
     searchTerm,
     yearFilter,
@@ -42,7 +44,7 @@ const MovieList: React.FC = () => {
   };
 
   const handleYearFilterChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setYearFilter(event.target.value);
   };
@@ -58,17 +60,22 @@ const MovieList: React.FC = () => {
           onChange={handleSearchChange}
           className="border border-gray-300 rounded-md p-2 mr-2"
         />
-        <input
-          type="text"
-          placeholder="Year"
+        <select
           value={yearFilter}
           onChange={handleYearFilterChange}
           className="border border-gray-300 rounded-md p-2"
-        />
+        >
+          <option value="">Year</option>
+
+          {years.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
       </div>
 
-      {/* grid that contains the movies */}
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center align-middle">
         {movies?.map((movie: any) => (
           <MovieCard key={movie.imdbID} movie={movie} />
         ))}
