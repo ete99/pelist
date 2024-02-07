@@ -1,14 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-interface Movie {
-  Title: string;
-  Year: string;
-  Poster: string;
-  Rating: string;
-  Plot: string;
-  imdbID: string;
-}
+import Movie from "../interfaces/movie.interface";
 
 interface MovieCardProps {
   movie: Movie;
