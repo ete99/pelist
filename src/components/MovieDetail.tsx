@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { omdbapiAxiosInstance } from "../utils/omdbapiAxiosInstance";
 import Skeleton from "react-loading-skeleton";
 import { FaStar } from "react-icons/fa";
-import ImageLikeSkeleton from "./ImageLikeSkeleton";
+import ImageLikeSkeleton from "./ImageWithSkeleton";
 
 const MovieDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();

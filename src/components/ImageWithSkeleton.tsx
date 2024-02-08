@@ -3,13 +3,13 @@ import Skeleton from "react-loading-skeleton";
 
 interface ImageLikeSkeletonProps {
   src: string;
-  alt?: string;
+  alt: string;
   className?: string;
 }
 
 const ImageLikeSkeleton: React.FC<ImageLikeSkeletonProps> = ({
   src,
-  alt = "Skeletal",
+  alt,
   className,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
