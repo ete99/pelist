@@ -20,6 +20,7 @@ const MovieDetail: React.FC = () => {
       const response = await omdbapiAxiosInstance({
         params: {
           i: id,
+          plot: "full",
         },
       });
       setMovie(response.data);
@@ -56,7 +57,14 @@ const MovieDetail: React.FC = () => {
           <div className="flex align-middle">
             <FaStar className="h-5" />
           </div>
-          <p className="ml-1">{movie.imdbRating || <Skeleton />} / 10</p>
+          <div className="ml-1 w-16 flex flex-row">
+            {movie.imdbRating || (
+              <div className="w-5">
+                <Skeleton />
+              </div>
+            )}
+            <p className="ml-1">/ 10</p>
+          </div>
         </div>
         <p className="text-base text-gray-800 mb-4">
           {movie.Plot || <Skeleton />}

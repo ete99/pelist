@@ -2,7 +2,7 @@ interface Movie {
   Title: string;
   Year: string;
   Poster: string;
-  Rating: string;
+  imdbRating: string;
   Plot: string;
   imdbID: string;
 }
