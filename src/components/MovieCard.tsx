@@ -1,3 +1,8 @@
+/**
+ * Represents a movie card component.
+ * Displays information about a movie, including its title, poster, short plot, rating, and year.
+ * Allows the user to navigate to the movie details page and add the movie to their collection.
+ */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Movie from "../interfaces/movie.interface";
@@ -13,6 +18,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   const [fullMovie, setFullMovie] = useState<Movie>();
 
   useEffect(() => {
+    /**
+     * Fetches additional details of the movie from the OMDB API.
+     * @param id - The IMDB ID of the movie.
+     */
     const fetchMovieDetails = async (id: string | undefined) => {
       if (!id) {
         return;

@@ -1,12 +1,14 @@
+/**
+ * Represents a loading indicator component.
+ * This component is used to display a spinner while content is being loaded.
+ */
 import React from "react";
 
 const LoadingIndicator: React.FC = () => {
   return (
-    // <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
     <div className="flex w-full justify-center align-middle">
       <div className="spinner"></div>
     </div>
-    // </div>
   );
 };
 

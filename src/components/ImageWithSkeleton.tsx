@@ -1,3 +1,23 @@
+/**
+ * A component that displays an image with a skeleton loading animation.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * import React from "react";
+ * import ImageLikeSkeleton from "./ImageWithSkeleton";
+ *
+ * const App: React.FC = () => {
+ *   return (
+ *     <div>
+ *       <ImageLikeSkeleton src="image.jpg" alt="Image" className="image" />
+ *     </div>
+ *   );
+ * };
+ *
+ * export default App;
+ * ```
+ */
 import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 

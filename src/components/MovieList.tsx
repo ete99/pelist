@@ -12,6 +12,13 @@ const MovieList: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 10 }, (_, index) => currentYear - index);
 
+  /**
+   * Fetches movies based on the provided search term and year filter.
+   * @param {Object} options - The options for fetching movies.
+   * @param {string | undefined} options.searchTerm - The search term to filter movies by.
+   * @param {string | undefined} options.yearFilter - The year filter to filter movies by.
+   * @returns {Promise<void>} - A promise that resolves when the movies are fetched.
+   */
   const fetchMovies = async ({
     searchTerm,
     yearFilter,
@@ -35,6 +42,10 @@ const MovieList: React.FC = () => {
     setLoading(false);
   };
 
+  /**
+   * Fetches movies based on the provided search term and year filter.
+   * This effect will be triggered whenever the search term or year filter changes.
+   */
   useEffect(() => {
     fetchMovies({ searchTerm, yearFilter });
   }, [searchTerm, yearFilter]);
@@ -77,7 +88,7 @@ const MovieList: React.FC = () => {
       <div className="flex flex-wrap justify-center align-middle">
         {loading && <LoadingIndicator />}
 
-        {searchTerm && !loading && (!movies || movies.length == 0) && (
+        {searchTerm && !loading && (!movies || movies.length === 0) && (
           <p className="text-center w-full">No movies found.</p>
         )}
         {movies?.map((movie: any) => (

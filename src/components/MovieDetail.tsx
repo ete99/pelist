@@ -1,3 +1,9 @@
+/**
+ * MovieDetail component displays the details of a movie.
+ * It fetches the movie details from the OMDB API using the movie ID.
+ * If the movie ID is invalid or the API request fails, it displays an error message.
+ * The component also uses Skeleton components to show loading placeholders while the data is being fetched.
+ */
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { omdbapiAxiosInstance } from "../utils/omdbapiAxiosInstance";
@@ -10,6 +16,12 @@ const MovieDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<any>({});
 
+  /**
+   * Fetches the details of the movie with the given ID from the OMDB API.
+   * If the ID is invalid, it displays an error message.
+   * If the API request fails, it displays an error message.
+   * @param id - The ID of the movie.
+   */
   const fetchMovieDetails = async (id: string | undefined) => {
     if (!id) {
       toast.error("Invalid movie ID");
