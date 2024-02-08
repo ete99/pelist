@@ -51,7 +51,6 @@ const MovieList: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {loading && <LoadingIndicator />}
       <div className="mb-4">
         <input
           type="text"
@@ -76,6 +75,12 @@ const MovieList: React.FC = () => {
       </div>
 
       <div className="flex flex-wrap justify-center align-middle">
+        {loading && <LoadingIndicator />}
+
+        {searchTerm && !loading && (!movies || movies.length == 0) && (
+          <p className="text-center w-full">No movies found.</p>
+        )}
+
         {movies?.map((movie: any) => (
           <MovieCard key={movie.imdbID} movie={movie} />
         ))}
