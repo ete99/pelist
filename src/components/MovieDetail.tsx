@@ -39,7 +39,7 @@ const MovieDetail: React.FC = () => {
   return (
     <div className="max-w-md mx-auto mt-8 bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
       <ImageLikeSkeleton
-        className={"h-96 w-full object-cover"}
+        className={"max-h-96 w-full object-contain"}
         src={movie.Poster}
         alt={movie.Title}
       />
