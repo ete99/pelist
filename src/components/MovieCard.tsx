@@ -43,6 +43,9 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               src={movie.Poster}
               alt={movie.Title}
               className="h-48 w-32 rounded-md mb-2 object-cover object-center"
+              onError={(e) => {
+                e.currentTarget.src = "/logo512.png";
+              }}
             />
             <h2 className="tituloTruncado text-lg font-bold mb-2 text-ellipsis h-14 block">
               {movie.Title}

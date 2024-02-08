@@ -29,6 +29,10 @@ const ImageLikeSkeleton: React.FC<ImageLikeSkeletonProps> = ({
           display: isLoading ? "none" : "block",
         }}
         onLoad={handleImageLoad}
+        onError={(e) => {
+          e.currentTarget.src = "/logo512.png";
+          setIsLoading(false);
+        }}
       />
     </div>
   );
