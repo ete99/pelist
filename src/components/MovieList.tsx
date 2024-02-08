@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { omdbapiAxiosInstance } from "../utils/omdbapiAxiosInstance";
 import MovieCard from "./MovieCard";
 import LoadingIndicator from "./LoadingIndicator";
+import toast from "react-hot-toast";
 
 const MovieList: React.FC = () => {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [yearFilter, setYearFilter] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 10 }, (_, index) => currentYear - index);
@@ -41,11 +43,25 @@ const MovieList: React.FC = () => {
       return;
     }
 
-    const response = await omdbapiAxiosInstance({
-      params: queryParams,
-    });
-    setMovies(response.data.Search);
-    setLoading(false);
+    try {
+      const response = await omdbapiAxiosInstance({
+        params: queryParams,
+      });
+
+      if (response.data.Error) {
+        setMovies([]);
+        setError(response.data.Error);
+        return;
+      }
+
+      setMovies(response.data.Search);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+      setMovies([]);
+      toast.error("Failed to fetch movies");
+    } finally {
+      setLoading(false);
+    }
   };
 
   /**
@@ -95,7 +111,7 @@ const MovieList: React.FC = () => {
         {loading && <LoadingIndicator />}
 
         {searchTerm && !loading && (!movies || movies.length === 0) && (
-          <p className="text-center w-full">No movies found.</p>
+          <p className="text-center w-full">{error}</p>
         )}
         {movies?.map((movie: any) => (
           <MovieCard key={movie.imdbID} movie={movie} />
