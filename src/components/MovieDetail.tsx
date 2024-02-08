@@ -4,21 +4,32 @@ import { omdbapiAxiosInstance } from "../utils/omdbapiAxiosInstance";
 import Skeleton from "react-loading-skeleton";
 import { FaStar } from "react-icons/fa";
 import ImageLikeSkeleton from "./ImageWithSkeleton";
+import toast from "react-hot-toast";
 
 const MovieDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<any>({});
 
   const fetchMovieDetails = async (id: string | undefined) => {
-    console.log(id);
-    if (!id) return;
+    if (!id) {
+      toast.error("Invalid movie ID");
+      return;
+    }
 
-    const response = await omdbapiAxiosInstance({
-      params: {
-        i: id,
-      },
-    });
-    setMovie(response.data);
+    try {
+      const response = await omdbapiAxiosInstance({
+        params: {
+          i: id,
+        },
+      });
+      setMovie(response.data);
+      if (response.data.Error) {
+        toast.error(response.data.Error);
+      }
+    } catch (error) {
+      toast.error("Failed to fetch movie details");
+      // console.error(error);
+    }
   };
 
   useEffect(() => {
