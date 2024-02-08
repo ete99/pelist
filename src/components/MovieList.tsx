@@ -35,6 +35,12 @@ const MovieList: React.FC = () => {
       queryParams = { ...queryParams, y: yearFilter };
     }
 
+    if (Object.keys(queryParams).length === 0) {
+      setMovies([]);
+      setLoading(false);
+      return;
+    }
+
     const response = await omdbapiAxiosInstance({
       params: queryParams,
     });
