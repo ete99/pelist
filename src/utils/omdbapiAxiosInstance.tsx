@@ -5,7 +5,7 @@ import axios from "axios";
  */
 export const omdbapiAxiosInstance = axios.create({
   method: "GET",
-  baseURL: `http://www.omdbapi.com/`,
+  baseURL: `https://www.omdbapi.com/`,
   timeout: 5000, // 5 seconds and then the request is cancelled
   params: {
     apikey: process.env.REACT_APP_OMDB_API_KEY, // Add the API KEY
