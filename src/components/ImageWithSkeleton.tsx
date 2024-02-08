@@ -20,7 +20,7 @@ const ImageLikeSkeleton: React.FC<ImageLikeSkeletonProps> = ({
 
   return (
     <div>
-      {isLoading && <Skeleton className={className} />}
+      {isLoading && <Skeleton className={className + " h-96"} />}
       <img
         src={src}
         alt={alt}
