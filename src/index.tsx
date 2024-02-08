@@ -3,9 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import { SkeletonTheme } from "react-loading-skeleton";
+
 import "react-loading-skeleton/dist/skeleton.css";
 
 const root = ReactDOM.createRoot(
@@ -13,12 +11,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Toaster />
-    <SkeletonTheme baseColor="#e3e3e3" highlightColor="#f9f9f9">
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </SkeletonTheme>
+    <App />
   </React.StrictMode>
 );
 
