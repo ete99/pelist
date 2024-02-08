@@ -54,15 +54,15 @@ const MovieList: React.FC = () => {
       <div className="mb-4">
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search titles"
           value={searchTerm}
           onChange={handleSearchChange}
-          className="border border-gray-300 rounded-md p-2 mr-2"
+          className="border-2 border-stone-800 ml-2 rounded-md py-2 px-4 mr-2 h-11 focus:outline-none focus:border-blue-500"
         />
         <select
           value={yearFilter}
           onChange={handleYearFilterChange}
-          className="border border-gray-300 rounded-md p-2"
+          className="border-2 border-stone-800 rounded-md py-2 px-4 h-11 focus:outline-none focus:border-blue-500"
         >
           <option value="">Year</option>
 
@@ -80,7 +80,6 @@ const MovieList: React.FC = () => {
         {searchTerm && !loading && (!movies || movies.length == 0) && (
           <p className="text-center w-full">No movies found.</p>
         )}
-
         {movies?.map((movie: any) => (
           <MovieCard key={movie.imdbID} movie={movie} />
         ))}
