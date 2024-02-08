@@ -2,6 +2,7 @@
 import { Route, Routes } from "react-router-dom";
 import MovieList from "./components/MovieList";
 import MovieDetail from "./components/MovieDetail";
+import NotFound from "./NotFound";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MovieList />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
