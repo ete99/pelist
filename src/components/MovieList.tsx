@@ -3,6 +3,7 @@ import { omdbapiAxiosInstance } from "../utils/omdbapiAxiosInstance";
 import MovieCard from "./MovieCard";
 import LoadingIndicator from "./LoadingIndicator";
 import toast from "react-hot-toast";
+import Select from "react-select";
 
 const MovieList: React.FC = () => {
   const [movies, setMovies] = useState([]);
@@ -12,7 +13,7 @@ const MovieList: React.FC = () => {
   const [error, setError] = useState("");
 
   const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 10 }, (_, index) => currentYear - index);
+  const years = Array.from({ length: 70 }, (_, index) => currentYear - index);
 
   /**
    * Fetches movies based on the provided search term and year filter.
@@ -77,34 +78,39 @@ const MovieList: React.FC = () => {
   };
 
   const handleYearFilterChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    selectedOption: { value: string; label: string } | null
   ) => {
-    setYearFilter(event.target.value);
+    setYearFilter(selectedOption?.value || "");
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-4">
+      <div className="flex row mb-4">
         <input
           type="text"
           placeholder="Search titles"
           value={searchTerm}
           onChange={handleSearchChange}
-          className="border-2 border-stone-800 ml-2 rounded-md py-2 px-4 mr-2 h-11 focus:outline-none focus:border-blue-500"
+          className="border-2 border-stone-800 ml-2 rounded-md py-2 px-4 mr-2 h-10 focus:outline-none focus:border-blue-500"
         />
-        <select
-          value={yearFilter}
-          onChange={handleYearFilterChange}
-          className="border-2 border-stone-800 rounded-md py-2 px-4 h-11 focus:outline-none focus:border-blue-500"
-        >
-          <option value="">Year</option>
-
-          {years.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
+        <div>
+          <Select
+            value={{ value: yearFilter, label: yearFilter }}
+            onChange={handleYearFilterChange}
+            options={years.map((year) => ({
+              value: year.toString(),
+              label: year.toString(),
+            }))}
+            className="ml-2 w-28 h-11 react-select-border"
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                border: "2px solid",
+                borderRadius: "0.375rem",
+              }),
+            }}
+          />
+        </div>
       </div>
 
       <div className="flex flex-wrap justify-center align-middle">
