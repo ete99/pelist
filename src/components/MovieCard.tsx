@@ -60,7 +60,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             </div>
             <div className="flex flex-row items-start  text-sm text-gray-600 mb-2 align-middle">
               <div className="flex align-middle">
-                <FaStar className="h-5" />
+                <FaStar className="h-5 text-yellow-500" />
               </div>
               <div className="ml-1 flex flex-row">
                 {fullMovie?.imdbRating ? (
