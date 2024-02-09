@@ -95,12 +95,16 @@ const MovieList: React.FC = () => {
         />
         <div>
           <Select
-            value={{ value: yearFilter, label: yearFilter }}
+            value={yearFilter ? { value: yearFilter, label: yearFilter } : null}
             onChange={handleYearFilterChange}
-            options={years.map((year) => ({
-              value: year.toString(),
-              label: year.toString(),
-            }))}
+            options={[
+              { value: "", label: "Select Year" }, // Default empty option
+              ...years.map((year) => ({
+                value: year.toString(),
+                label: year.toString(),
+              })),
+            ]}
+            placeholder="Year"
             className="ml-2 w-28 h-11 react-select-border"
             styles={{
               control: (provided) => ({
