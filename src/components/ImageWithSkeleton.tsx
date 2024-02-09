@@ -50,6 +50,9 @@ const ImageLikeSkeleton: React.FC<ImageLikeSkeletonProps> = ({
         }}
         onLoad={handleImageLoad}
         onError={(e) => {
+          if (e.currentTarget.src !== "/logo512.png") {
+            e.currentTarget.src = "/logo512.png";
+          }
           e.currentTarget.src = "/logo512.png";
           setIsLoading(false);
         }}
