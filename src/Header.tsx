@@ -1,29 +1,35 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { FiArrowLeft } from "react-icons/fi";
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
-    <header className="bg-blue-500 py-4">
-      <div className="container mx-auto flex items-center justify-between">
+    <header className="bg-teal-500 p-4">
+      <div className="flex items-center justify-between">
+        <button onClick={goBack} className="text-white">
+          <FiArrowLeft
+            style={{
+              fontWeight: "bold",
+              strokeWidth: "4",
+              cursor: "pointer",
+              height: "20px",
+              width: "20px",
+            }}
+          />
+        </button>
         <h1 className="text-white text-2xl font-bold">Pelist</h1>
-        <nav>
-          <ul className="flex space-x-4">
-            <li>
-              <a href="#" className="text-white hover:text-gray-200">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-white hover:text-gray-200">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-white hover:text-gray-200">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <div
+          style={{
+            width: "20px",
+            height: "20px",
+          }}
+        ></div>
       </div>
     </header>
   );
