@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# Pelist
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Pelist is an application that allows users to search for movies.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To run the project, you have three options: using Docker, Docker Compose, or npm.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Using Docker
 
-### `npm test`
+Follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository: `git clone https://github.com/ete99/Pelist.git`
+2. Navigate to the project directory: `cd Pelist`
+3. Build the Docker image: `docker build -t pelist .`
+4. Run the Docker container: `docker run -p 3000:3000 pelist`
 
-### `npm run build`
+### Using Docker Compose
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Alternatively, you can use Docker Compose to simplify the process. Follow these steps:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository: `git clone https://github.com/ete99/Pelist.git`
+2. Navigate to the project directory: `cd Pelist`
+3. Run the Docker Compose command: `docker-compose up --build react-app`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Using npm
 
-### `npm run eject`
+If you prefer to run the project directly with npm, follow these steps:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Clone the repository: `git clone https://github.com/ete99/Pelist.git`
+2. Navigate to the project directory: `cd Pelist`
+3. Install the dependencies: `npm install`
+4. Start the application: `npm start`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Once the Docker container or npm server is running, you can access the application by opening your web browser and navigating to `http://localhost:3000`. From there, you can search for movies using the provided search functionality.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the [MIT License](LICENSE).
