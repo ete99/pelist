@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { omdbapiAxiosInstance } from "../utils/omdbapiAxiosInstance";
 import MovieCard from "./MovieCard";
 import LoadingIndicator from "./LoadingIndicator";
-import toast from "react-hot-toast";
 import Select from "react-select";
+import { fetchMovies } from "../services/dataService";
 
 const MovieList: React.FC = () => {
   const [movies, setMovies] = useState([]);
@@ -17,60 +16,19 @@ const MovieList: React.FC = () => {
 
   /**
    * Fetches movies based on the provided search term and year filter.
-   * @param {Object} options - The options for fetching movies.
-   * @param {string | undefined} options.searchTerm - The search term to filter movies by.
-   * @param {string | undefined} options.yearFilter - The year filter to filter movies by.
-   * @returns {Promise<void>} - A promise that resolves when the movies are fetched.
-   */
-  const fetchMovies = async ({
-    searchTerm,
-    yearFilter,
-  }: {
-    searchTerm: string | undefined;
-    yearFilter: string | undefined;
-  }) => {
-    setLoading(true);
-    let queryParams = {};
-    if (searchTerm) {
-      queryParams = { s: searchTerm };
-    }
-    if (yearFilter) {
-      queryParams = { ...queryParams, y: yearFilter };
-    }
-
-    if (Object.keys(queryParams).length === 0) {
-      setMovies([]);
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await omdbapiAxiosInstance({
-        params: queryParams,
-      });
-
-      if (response.data.Error) {
-        setMovies([]);
-        setError(response.data.Error);
-        return;
-      }
-
-      setMovies(response.data.Search);
-    } catch (error) {
-      console.error("Error fetching movies:", error);
-      setMovies([]);
-      toast.error("Failed to fetch movies");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  /**
-   * Fetches movies based on the provided search term and year filter.
    * This effect will be triggered whenever the search term or year filter changes.
    */
   useEffect(() => {
-    fetchMovies({ searchTerm, yearFilter });
+    setLoading(true);
+    fetchMovies({ searchTerm, yearFilter }).then((res) => {
+      if (res.error) {
+        setError(res.error);
+        setMovies([]);
+      } else {
+        setMovies(res.movies);
+      }
+      setLoading(false);
+    });
   }, [searchTerm, yearFilter]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,15 +43,15 @@ const MovieList: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex row mb-4">
+      <div className="flex flex-row flex-wrap mb-4">
         <input
           type="text"
           placeholder="Search titles"
           value={searchTerm}
           onChange={handleSearchChange}
-          className="border-2 border-stone-800 ml-2 rounded-md py-2 px-4 mr-2 h-10 focus:outline-none focus:border-blue-500"
+          className="border-2 border-stone-800 ml-2 mb-2 rounded-md py-2 px-4 mr-2 h-10 focus:outline-none focus:border-blue-500"
         />
-        <div>
+        <div data-testid="year-filter-select">
           <Select
             value={yearFilter ? { value: yearFilter, label: yearFilter } : null}
             onChange={handleYearFilterChange}

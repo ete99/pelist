@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/__tests__/**/*.tsx"], // Add the path to the test file
   "exclude": ["node_modules", "build"]
 }

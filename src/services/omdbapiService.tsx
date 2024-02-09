@@ -3,7 +3,7 @@ import axios from "axios";
 /**
  * Axios instance for making GET requests to the OMDB API.
  */
-export const omdbapiAxiosInstance = axios.create({
+export const omdbapiService = axios.create({
   method: "GET",
   baseURL: `https://www.omdbapi.com/`,
   timeout: 5000, // 5 seconds and then the request is cancelled
@@ -16,4 +16,4 @@ export const omdbapiAxiosInstance = axios.create({
   timeoutErrorMessage: "Timeout",
 });
 
-export default omdbapiAxiosInstance;
+export default omdbapiService;

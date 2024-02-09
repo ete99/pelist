@@ -6,47 +6,24 @@
  */
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { omdbapiAxiosInstance } from "../utils/omdbapiAxiosInstance";
 import Skeleton from "react-loading-skeleton";
 import { FaStar } from "react-icons/fa";
 import ImageLikeSkeleton from "./ImageWithSkeleton";
 import toast from "react-hot-toast";
+import { fetchMovieDetails } from "../services/dataService";
 
 const MovieDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<any>({});
 
-  /**
-   * Fetches the details of the movie with the given ID from the OMDB API.
-   * If the ID is invalid, it displays an error message.
-   * If the API request fails, it displays an error message.
-   * @param id - The ID of the movie.
-   */
-  const fetchMovieDetails = async (id: string | undefined) => {
-    if (!id) {
-      toast.error("Invalid movie ID");
-      return;
-    }
-
-    try {
-      const response = await omdbapiAxiosInstance({
-        params: {
-          i: id,
-          plot: "full",
-        },
-      });
-      setMovie(response.data);
-      if (response.data.Error) {
-        toast.error(response.data.Error);
-      }
-    } catch (error) {
-      toast.error("Failed to fetch movie details");
-      // console.error(error);
-    }
-  };
-
   useEffect(() => {
-    fetchMovieDetails(id);
+    fetchMovieDetails(id, "full").then((data: any) => {
+      if (data.Error) {
+        toast.error(data.Error);
+      } else {
+        setMovie(data);
+      }
+    });
   }, [id]);
 
   return (
